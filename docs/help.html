@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/moar.png" />
+    <title>rivotter - help</title>
+    <style>
+      body {
+        font-size: 120%;
+      }
+      .red-box {
+        background-color: red;
+        color: white;
+        padding: 0.1em 0.3em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>rivotter - help</h1>
+
+    <p>
+      The rivotter, available at
+      <a href="https://moar-things.github.io/rivotter">
+        https://moar-things.github.io/rivotter
+      </a>,
+      can be used to view v8 CPU profiles generated for Node.js
+      applications.
+    </p>
+
+    <p>
+      For more information and background on v8 CPU profiles, see the article
+      <a href="https://developers.google.com/web/tools/chrome-devtools/rendering-tools/js-execution">
+        Speed Up JavaScript Execution
+      </a>.
+    </p>
+
+    <h2>generating a cpu profile file</h2>
+
+    <p>
+      The following tools can be used to generate a v8 CPU profile for
+      Node.js:
+    </p>
+
+    <ul>
+      <li>
+        <a href="https://github.com/moar-things/moar-profiler">
+          moar-profiler
+        </a>
+      </li>
+
+      <li>
+        <a href="https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27">
+          Chrome DevTools
+        </a>
+      </li>
+
+      <li>
+        <a href="https://nodesource.com/products/nsolid">
+          NodeSource's N|Solid product
+        </a>
+      </li>
+
+      <li>
+        <a href="https://www.npmjs.com/package/v8-profiler">
+          v8-profiler package at npm
+        </a>
+      </li>
+    </ul>
+
+    <p>
+      Most tools generate CPU profile files with a file extension of
+      <tt>.cpuprofile</tt> .  Once you have a CPU profile file, you
+      can view it by visiting
+      <a href="https://moar-things.github.io/rivotter">
+        https://moar-things.github.io/rivotter
+      </a> . You can either drag the file onto the web page, or load
+      it from an input button on the page.
+    </p>
+
+    <p>
+      There are a few <tt>.cpuprofile</tt> files available
+      in the
+      <a href="https://github.com/moar-things/rivotter/tree/master/test/fixtures">
+        rivotter repository in the <tt>test/fixtures</tt> directory
+      </a>.
+      You probably want to try the "real life" on of a run of
+      <tt>npm update</tt>, which you can download via this link:
+      <a download="npm-update.moar.cpuprofile" href="https://raw.githubusercontent.com/moar-things/rivotter/master/test/fixtures/npm-update.moar.cpuprofile">
+        <tt>npm-update.moar.cpuprofile</tt>
+      </a>.
+    </p>
+
+    <h2>anatomy of rivotter</h2>
+
+    <p>Below is the web page with a profile loaded.</p>
+
+    <p><img src="images/screen-cap-annotated.png" width="100%"></p>
+
+    <p>The page is split into three panes:</p>
+
+    <ul>
+      <li>
+        the top pane displays a table of functions used by
+        your application, sorted by time used
+      </li>
+      <li>
+        the pane on the bottom left displays information about
+        the currently selected function, including what functions
+        call the currently selected function, and what functions are
+        called by the currently selected function
+      </li>
+      <li>
+        the pane on the bottom right displays source for the
+        currently selected function, when available
+      </li>
+    </ul>
+
+    <p>
+      When you click on a function in any of the three panes, the
+      top pane will scroll to that function, and highlight it in
+      purple to indicate that it's the currently selected function.
+      Other functions in the top pane will be colored green or yellow
+      if the selected function is called by the function (green) or
+      calls the function (yellow).
+    </p>
+    <p>
+      The bottom panes will be updated to show relevant information
+      for the selected function.  Functions which are called by, or
+      that call the selected function, will be shown in the top pane
+      with a yellow highlight.
+    </p>
+
+    <p>
+      The source code in the bottom right pane is annotated with blue and
+      red lines and bubbles.  The blue lines and bubbles indicate
+      functions which are listed in the top pane.  The red lines and bubbles
+      are lines within a function which the profile recorded statistics for.
+    </p>
+
+    <p>
+      To load a CPU profile from within this page, click the file
+      upload button shown at <span class="red-box">A</span>, which
+      will prompt you for a file to load.  Or you can drag and drop
+      a file onto the web page.
+    </p>
+
+    <p>
+      You can "zoom" into a pane (hiding the other panes) by clicking
+      the "zoom buttons" shown at <span class="red-box">B</span>.
+    </p>
+
+    <p>
+      Information about your Node.js process is shown on the line
+      at <span class="red-box">C</span>.  This information is only
+      available with profiles generated with moar-profiler.
+    </p>
+
+    <p>
+      Functions in the top pane can be sorted by total time or self
+      time, by clicking the respective buttons at
+      <span class="red-box">D</span>.
+    </p>
+
+    <p>
+      By default, only functions shown in "user" code is displayed.
+      "User" code is code not shipped with the Node.js runtime; eg,
+      the built-in modules fs, path, etc, are not "user" code.  You
+      can change to show all code, or back to just "user" code,
+      by clicking the respective buttons at
+      <span class="red-box">E</span>.
+    </p>
+
+    <p>
+      The "link" image beside package names, shown at
+      <span class="red-box">F</span>, will open that package's page
+      at npmjs.org, when clicked.
+    </p>
+
+    <p>
+      Where functions are shown in the bottom panes, they can be
+      clicked to change the page to show information about that
+      function.  Examples are shown at <span class="red-box">G</span>.
+    </p>
+
+    <h2>frequently asked questions</h2>
+
+    <ul>
+      <li><b>What are the red bubbles in the source code?</b>
+      <p>
+        The V8 CPU Profiler occaisonally provides information about
+        particular lines within a function; those lines are annotated
+        with a red bubble.  Note that the V8 CPU Profiler typically doesn't
+        provide many of these.
+      </p>
+      </li>
+
+      <li><b>The yellow and green lines in function list in the top pane don't seem right.</b>
+      <p>
+        Keep in mind that a function can both call a function and be called by
+        the same function.  Those functions are marked green (calls selected
+        function).
+      </p>
+      </li>
+
+      <li><b>There seem to be functions missing in the function list.</b>
+      <p>V8 does a great job inlining functions, as an optimization.
+        That is, it moves the body of a function into the caller of the
+        function.  When this happens, the function that gets reported will
+        be the caller, not the actual function.  Consider using the option
+        <tt>--no-use_inlining</tt> when running your node application to turn
+        off inlining, to get the correct accounting.
+      </p>
+      </li>
+
+      <li><b>Something still seems wrong.</b>
+      <p>
+        You may have found a bug!  Feel free to
+        <a href="https://github.com/moar-things/rivotter/issues">
+          open an issue
+        </a>.
+        Expect that you may need to provide your `.cpuprofile` file, to
+        reproduce the issue.
+      </p>
+      </li>
+
+    </ul>
+
+    <h2>need moar help?</h2>
+
+    <p>
+      If you are having problems using the <tt>moar-profiler</tt> tool
+      or the rivotter web page, consider opening an issue
+      at GitHub on the respective repository:
+    </p>
+
+    <ul>
+      <li>
+        <a href="https://github.com/moar-things/rivotter">
+          https://github.com/moar-things/<b>rivotter</b>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/moar-things/moar-profiler">
+          https://github.com/moar-things/<b>moar-profiler</b>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-106145082-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

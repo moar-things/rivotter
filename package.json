@@ -1,0 +1,61 @@
+{
+  "name": "rivotter",
+  "version": "0.0.1",
+  "description": "JavaScript source viewer and more",
+  "main": "rivotter.js",
+  "bin": {
+    "rivotter": "./rivotter.js"
+  },
+  "license": "MIT",
+  "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
+  "homepage": "https://github.com/moar-things/rivotter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moar-things/rivotter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moar-things/rivotter/issues"
+  },
+  "scripts": {
+    "build": "make build",
+    "test": "make test",
+    "watch": "nodemon --exec 'tools/top-level-make.sh watchTask'"
+  },
+  "standard": {
+    "ignore": [
+      "/tmp/",
+      "/docs/",
+      "/lib/prism.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  },
+  "dependencies": {
+    "glob-fs": "~0.1.7",
+    "minimist": "~1.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "~6.26.0",
+    "babel-preset-es2015": "~6.24.1",
+    "babel-preset-react": "~6.24.1",
+    "babelify": "~8.0.0",
+    "browserify": "~14.5.0",
+    "chalk": "~2.3.0",
+    "eslint": "~4.13.1",
+    "eslint-plugin-import": "~2.8.0",
+    "exorcist": "~1.0.0",
+    "jquery": "~3.2.1",
+    "jspanel3": "~3.11.1",
+    "less": "~2.7.2",
+    "nodemon": "~1.12.1",
+    "prop-types": "~15.6.0",
+    "react": "~16.2.0",
+    "react-dom": "~16.2.0",
+    "standard": "~10.0.3",
+    "tap-spec": "~4.1.1",
+    "tape": "~4.8.0"
+  }
+}
